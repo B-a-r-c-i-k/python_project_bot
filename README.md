@@ -14,5 +14,7 @@ Id:
 	@csgoparseritemsbot
 
 Чтобы начать введите команду: /start
+
 Введите ваш токен: /token <your_token>
+
 Тестовый токен: test
