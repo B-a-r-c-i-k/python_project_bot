@@ -33,7 +33,7 @@ def get_correct_form(names):
         names[i] = names[i].replace('(', '%28')
         names[i] = names[i].replace(')', '%29')
         names[i] = names[i].replace('|', '%7C')
-    # return names
+    return names
 
 
 def processing(prices_info):
@@ -80,6 +80,7 @@ def update_item(name):
                 len(item_base.items) // 5, 5)
         else:
             item_base.items = item_info.reshape(1, 5)
+        config.CNT_ITEMS = len(item_base.items)
         return True
     except:
         return False
@@ -94,7 +95,6 @@ def parse(cnt=None):
     config.CNT_ITEMS = cnt_items
     names = np.array([])
     for position in range(0, cnt_items, 100):
-        print(position)
         time.sleep(0.5)
         part_info_items = requests.get(
             'https://steamcommunity.com/market/search/render/?start=' +
@@ -110,7 +110,6 @@ def parse(cnt=None):
     for name in names:
         if (position == cnt_items):
             break
-        print(position)
         list_for_print = np.append(list_for_print, correct_names[position])
         list_for_print = np.append(list_for_print, name)
         j = json.loads(requests.get(

@@ -77,13 +77,13 @@ def help_message(message):
         "/random - выберет рандомно элемент из базы и выдаст информацию о нем")
     bot.send_message(
         message.chat.id,
-        "/elements (n) - выведет все(n) элементы из базы и информацию о них")
+        "/elements <n> - выведет все<n> элементы из базы и информацию о них")
     bot.send_message(
         message.chat.id,
-        "/update (n) - введите, чтобы загрузить ~все вещи(n) в базу")
+        "/update <n> - введите, чтобы загрузить ~все вещи(n) в базу")
     bot.send_message(
         message.chat.id,
-        "/update <name> - введите, чтобы загрузить предмет в базу")
+        "/update_item (name) - введите, чтобы загрузить предмет в базу")
     bot.send_message(
         message.chat.id,
         "P.S. () - обязательные параметры, <> - необязательные параметры")
@@ -93,10 +93,8 @@ def help_message(message):
 def update(message):
     if (check_token(message) is False):
         return
-    print(message.text.split())
     bot.send_message(message.chat.id, "Началось обновление")
     try:
-        print(message.text.split()[1])
         pars.parse(int(message.text.split()[1]))
     except:
         pars.parse()
@@ -136,7 +134,6 @@ def random_command(message):
         os.remove('items.csv')
     except OSError:
         pass
-    print(100)
     my_df = pd.DataFrame(
         item_base.items[:end_],
         columns=["name", "url_name", "avg_price", "avg_buys", "last_price"])
